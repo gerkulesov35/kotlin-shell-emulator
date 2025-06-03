@@ -3,6 +3,7 @@ package com.yandexbrouser.kotlinshell.commands
 import com.yandexbrouser.kotlinshell.createTestTarFile
 import com.yandexbrouser.kotlinshell.deleteTestFile
 import com.yandexbrouser.kotlinshell.filesystem.VirtualFileSystem
+import com.yandexbrouser.kotlinshell.commands.CatCommand
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -135,6 +136,32 @@ class CommandTests {
     val result = wcCommand.execute(listOf("nonexistent.txt"))
 
     assertEquals("File not found: nonexistent.txt", result)
+
+    deleteTestFile(tarFile)
+  }
+
+  @Test
+  fun `should display file contents with cat`() {
+    val tarFile = createTestTarFile(listOf("file1.txt" to "Hello"))
+    val fileSystem = VirtualFileSystem(tarFile.absolutePath)
+
+    val catCommand = CatCommand(fileSystem)
+    val result = catCommand.execute(listOf("file1.txt"))
+
+    assertEquals("Hello", result)
+
+    deleteTestFile(tarFile)
+  }
+
+  @Test
+  fun `should handle non-existent file for cat command`() {
+    val tarFile = createTestTarFile(listOf("file1.txt" to "Content"))
+    val fileSystem = VirtualFileSystem(tarFile.absolutePath)
+
+    val catCommand = CatCommand(fileSystem)
+    val result = catCommand.execute(listOf("missing.txt"))
+
+    assertEquals("File not found: missing.txt", result)
 
     deleteTestFile(tarFile)
   }

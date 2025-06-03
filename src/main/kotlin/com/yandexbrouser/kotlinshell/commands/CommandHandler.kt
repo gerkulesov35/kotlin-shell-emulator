@@ -2,6 +2,9 @@ package com.yandexbrouser.kotlinshell.commands
 
 import com.yandexbrouser.kotlinshell.filesystem.VirtualFileSystem
 
+// Newly added command
+import com.yandexbrouser.kotlinshell.commands.CatCommand
+
 class CommandHandler(private val virtualFileSystem: VirtualFileSystem) {
   private val history = mutableListOf<String>()
   private val startTime = System.currentTimeMillis()
@@ -18,6 +21,7 @@ class CommandHandler(private val virtualFileSystem: VirtualFileSystem) {
       "cd" -> CdCommand(virtualFileSystem).execute(args)
       "exit" -> ExitCommand().execute(args)
       "wc" -> WcCommand(virtualFileSystem).execute(args)
+      "cat" -> CatCommand(virtualFileSystem).execute(args)
       "history" -> HistoryCommand(history).execute(args)
       "uptime" -> UptimeCommand(startTime).execute(args)
       else -> "Unknown command: $commandName"

@@ -14,7 +14,7 @@ This project is a **Kotlin-based shell emulator** designed to mimic a session in
 ## Features
 
 - Simulates a command-line shell environment.
-- Supports executing commands like `ls`, `cd`, `exit`, `wc`, `history`, and `uptime`.
+- Supports executing commands like `ls`, `cd`, `exit`, `wc`, `cat`, `history`, and `uptime`.
 - Accepts a virtual file system in the form of a `.tar` file.
 - Tracks the uptime since the emulator was started.
 - Records and displays command history.
@@ -40,11 +40,15 @@ The emulator supports the following commands:
    - Displays the word count of the specified file.
    - Usage: `wc <file>`
 
-5. **`history`**:
+5. **`cat <file>`**:
+   - Outputs the contents of the specified file.
+   - Usage: `cat <file>`
+
+6. **`history`**:
    - Displays the history of commands executed in the current session.
    - Usage: `history`
 
-6. **`uptime`**:
+7. **`uptime`**:
    - Displays the amount of time the emulator has been running since startup.
    - Usage: `uptime`
 
